@@ -3,14 +3,15 @@ package main
 import (
 	"log"
 	"net/http"
+	"shitapi/lotus"
 	"time"
 )
 
 func main() {
-	//serverHandler := &SimpleServerHandler{}
-	//
-	//rpcServer := jsonrpc.NewServer()
-	//rpcServer.Register("SimpleServerHandler", serverHandler)
+
+	closer := lotus.Init()
+	defer closer()
+
 	r := mapRoutes()
 	srv := &http.Server{
 		Handler:           r,
